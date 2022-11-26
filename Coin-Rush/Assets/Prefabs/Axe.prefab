@@ -128,4 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axeRb: {fileID: 3795264163182337516}
-  player: {fileID: 6181486741662290775, guid: cc02eed6db9cad449890c5d0e77753e1, type: 3}
+  player: {fileID: 0}

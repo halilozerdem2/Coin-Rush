@@ -18,11 +18,7 @@ public class PlayerMovement : MonoBehaviour
         rb= GetComponent<Rigidbody>();
     }
     
-    private void Update()
-    {
-        
-    }
-    
+  
     private void FixedUpdate()
     {
         directionValue = controllerBar.value;
@@ -32,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void RollAndSteer()
     {
-        rb.AddForce(Vector3.forward * speed);
+        rb.velocity = Vector3.forward*speed;
 
         if (directionValue != 0.5f)
             rb.AddForce(Vector3.right * CalculateSteerSpeed(directionValue));
@@ -42,10 +38,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float calculatedSteerValue ;
 
-        calculatedSteerValue = (aDirectionValue - 0.5f) * 35f;
+        calculatedSteerValue = (aDirectionValue - 0.5f) *  400f;
 
         return calculatedSteerValue;
     }
+    
     
    
 

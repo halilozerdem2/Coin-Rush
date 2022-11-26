@@ -6,18 +6,21 @@ public class AxeGravity : MonoBehaviour
 {
     //public GameObject player;
     public Rigidbody axeRb;
-    public PlayerMovement player;
-   
-    
-    private void Start()
+
+    public GameObject player;
+
+    private void Awake()
     {
-        axeRb = GetComponent<Rigidbody>();
+        player = GameObject.Find("PlayerCoin");
     }
+    
     private void Update()
     {
-       // if(Mathf.Abs(player.transform.position.z- this.transform.position.z)<=30f)
-
+        if(Mathf.Abs(player.transform.position.z-this.transform.position.z)<=20f)
+        {
+            axeRb.isKinematic = false;
+            axeRb.useGravity= true;
+        }
     }
-
 
 }
