@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2552108344093643992}
   - component: {fileID: 3795264163182337516}
   - component: {fileID: 3795264163182337512}
+  - component: {fileID: 7867753692673360088}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -95,8 +96,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 96
   m_CollisionDetection: 0
@@ -114,3 +115,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 0
   m_Mesh: {fileID: -8287839383430266118, guid: 2543dfd3afbaff44b828a9ac78f3d065, type: 3}
+--- !u!114 &7867753692673360088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4065085203103397133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8b03a93d61f7f4ab65c9f4efa508b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axeRb: {fileID: 3795264163182337516}
+  player: {fileID: 6181486741662290775, guid: cc02eed6db9cad449890c5d0e77753e1, type: 3}

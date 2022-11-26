@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.iOS;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,53 +6,47 @@ public class PlayerMovement : MonoBehaviour
 
     public Scrollbar controllerBar;
     public Rigidbody rb;
-
+    public bool isTriggered = false;
+    
+    
     [SerializeField] public float speed = 20f;
+    [SerializeField] public float directionValue;
+
 
     private void Start()
     {
         rb= GetComponent<Rigidbody>();
     }
-
+    
     private void Update()
     {
+        
     }
+    
     private void FixedUpdate()
     {
-        float directionValue = controllerBar.value;
-        RollAndSteer(directionValue);
-    }
-    
-    public void RollAndSteer(float aSteerValue)
-    {
-        rb.AddForce(Vector3.forward*speed);
-        
-        if(aSteerValue!=0.5)
-            rb.AddForce(Vector3.right * CalculateSteerSpeed(aSteerValue));
+        directionValue = controllerBar.value;
+        RollAndSteer();
         
     }
-    
 
-    public float CalculateSteerSpeed(float aDirectionValue)
+    private void RollAndSteer()
     {
-        float calculatedSteerValue =10f;
+        rb.AddForce(Vector3.forward * speed);
 
-        if(aDirectionValue<0.5f)
-        {
-            if(aDirectionValue==0f)
+        if (directionValue != 0.5f)
+            rb.AddForce(Vector3.right * CalculateSteerSpeed(directionValue));
+    }
 
-                calculatedSteerValue = -12f;
-            else
-                calculatedSteerValue = aDirectionValue * -12f;
-        }
+    private float CalculateSteerSpeed(float aDirectionValue)
+    {
+        float calculatedSteerValue ;
 
-        else if(aDirectionValue>0.5f)
-        {
-            calculatedSteerValue = aDirectionValue * 12f;
-        }
-        
+        calculatedSteerValue = (aDirectionValue - 0.5f) * 35f;
 
         return calculatedSteerValue;
     }
+    
+   
 
 }
