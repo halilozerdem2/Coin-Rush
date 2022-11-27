@@ -1,49 +1,42 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    public Scrollbar controllerBar;
     public Rigidbody rb;
-    public bool isTriggered = false;
-    
-    
-    [SerializeField] public float speed = 20f;
-    [SerializeField] public float directionValue;
+    public Scrollbar controllerBar;
+    [SerializeField] public float moveSpeed=10f;
+    public float steerSpeed;
 
-
-    private void Start()
+    private void Awake()
     {
-        rb= GetComponent<Rigidbody>();
+        rb=GetComponent<Rigidbody>();
+        controllerBar=FindObjectOfType<Scrollbar>();
     }
-    
-  
     private void FixedUpdate()
     {
-        directionValue = controllerBar.value;
-        RollAndSteer();
-        
+        Roll();
+        Steer(steerSpeed);
     }
-
-    private void RollAndSteer()
+    private void Update()
     {
-        rb.velocity = Vector3.forward*speed;
-
-        if (directionValue != 0.5f)
-            rb.AddForce(Vector3.right * CalculateSteerSpeed(directionValue));
+        CalculateSteerSpeed();
     }
 
-    private float CalculateSteerSpeed(float aDirectionValue)
+    private void CalculateSteerSpeed()
     {
-        float calculatedSteerValue ;
-
-        calculatedSteerValue = (aDirectionValue - 0.5f) *  400f;
-
-        return calculatedSteerValue;
+        steerSpeed = (controllerBar.value - 0.5f) * 400f;
     }
-    
-    
-   
+
+    public void Roll()
+    {
+        rb.velocity = new Vector3(0,0,moveSpeed);
+    }
+    public void Steer(float aValue)
+    {
+        rb.AddForce(new Vector3 (aValue,0,0));
+    }
+
 
 }

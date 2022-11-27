@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Camera mainCamera;
+    public GameObject playerCoin;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
+    {
+
+    }
+    private void Update()
     {
         
     }

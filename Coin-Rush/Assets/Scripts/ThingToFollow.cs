@@ -8,6 +8,6 @@ public class ThingToFollow : MonoBehaviour
 
     void Update()
     {
-        this.transform.position = objectToFollow.transform.position + new Vector3(0,4,-5);   
+        this.transform.position = objectToFollow.transform.position + new Vector3(0,5,-7);   
     }
 }

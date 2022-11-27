@@ -14,6 +14,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject roadPrefab;
     public GameObject player;
     public List<GameObject> roadPrefabs;
+    public StackCoin coin;
 
     public Vector3 spawnPoint;
     public bool spawned;
@@ -40,6 +41,13 @@ public class LevelGenerator : MonoBehaviour
     {
         roadPrefab = roadPrefabs[0];
         GameObject temp = Instantiate(roadPrefab, spawnPoint, Quaternion.identity);
+
+        for (int i = 0; i < Random.Range(1,5); i++)
+        {
+            coin.currentPosition = temp.transform.position + coin.CalculateCoinSpawnPosition();
+            coin.InstantiateStackCoin(coin.currentPosition);  
+        }
+        
         spawnPoint = temp.transform.GetChild(0).transform.position;
         spawned = true;
 
@@ -61,12 +69,20 @@ public class LevelGenerator : MonoBehaviour
     }
     private void SpawnandDestroyGrounds()
     {
+        //Plane Spawn
         roadPrefab = roadPrefabs[Random.Range(0, 3)];
         GameObject temp = Instantiate(roadPrefab, spawnPoint, Quaternion.identity);
+        
+        //Coin Spawn
+        for (int i = 0; i < Random.Range(1, 5); i++)
+        {
+            coin.currentPosition = temp.transform.position + coin.CalculateCoinSpawnPosition();
+            coin.InstantiateStackCoin(coin.currentPosition);
+        }
+        //Next Spawn Point
         spawnPoint = temp.transform.GetChild(0).transform.position;
         Destroy(temp, 10);
 
-       
-
     }
+   
 }
