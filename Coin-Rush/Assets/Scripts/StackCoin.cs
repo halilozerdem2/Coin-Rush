@@ -28,10 +28,7 @@ public class StackCoin : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(isTouched)
-        {
-            Follow();
-        }
+        transform.Rotate(new Vector3(0, 10, 0));
     }
 
     private void OnTriggerEnter(Collider other)

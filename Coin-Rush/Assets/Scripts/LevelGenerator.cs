@@ -17,6 +17,7 @@ public class LevelGenerator : MonoBehaviour
     public StackCoin coin;
 
     public Vector3 spawnPoint;
+    public int spawnCounter;
     public bool spawned;
     
     private void Awake()
@@ -34,11 +35,31 @@ public class LevelGenerator : MonoBehaviour
         CalculateTheDistance();
         
         if(CanSpawn(CalculateTheDistance()))
-            SpawnandDestroyGrounds();
+            if(spawnCounter<5)
+                SpawnandDestroyGrounds();
+            else if(spawnCounter==5)
+                SpawnFinishGround();
+            
     }
 
+    private void SpawnFinishGround()
+    {
+        spawnCounter++;
+        roadPrefab = roadPrefabs[3];
+        GameObject temp = Instantiate(roadPrefab, spawnPoint, Quaternion.identity);
+        
+        for (int i = 0; i < Random.Range(5, 10); i++)
+        {
+            coin.currentPosition = temp.transform.position + coin.CalculateCoinSpawnPosition();
+            coin.InstantiateStackCoin(coin.currentPosition);
+        }
+
+        spawnPoint =temp.transform.position+coin.CalculateCoinSpawnPosition();
+
+    }
     private void InstantiateFirstGround()
     {
+        spawnCounter++;
         roadPrefab = roadPrefabs[0];
         GameObject temp = Instantiate(roadPrefab, spawnPoint, Quaternion.identity);
 
@@ -69,6 +90,7 @@ public class LevelGenerator : MonoBehaviour
     }
     private void SpawnandDestroyGrounds()
     {
+        spawnCounter++;
         //Plane Spawn
         roadPrefab = roadPrefabs[Random.Range(0, 3)];
         GameObject temp = Instantiate(roadPrefab, spawnPoint, Quaternion.identity);
